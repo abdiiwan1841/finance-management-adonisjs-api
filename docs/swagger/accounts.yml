@@ -1,0 +1,143 @@
+/api/v1/accounts/create:
+  post:
+    tags:
+      - Accounts
+    security:
+      - bearerAuth: []
+    summary: Create account
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              account_name:
+                type: string
+                example: 'Conta da Caixa'
+                required: true
+              account_number:
+                type: string
+                example: '1111333366668888'
+                required: true
+              account_currency:
+                type: string
+                example: 'BRL'
+                required: true
+              account_type:
+                type: string
+                example: 'Conta Corrente'
+                required: true
+              bank_name:
+                type: string
+                example: 'Caixa Econômica'
+                required: true
+              bank_balance:
+                type: integer
+                example: 3000
+                required: true
+    responses:
+      201:
+        description: Created
+      422:
+        description: Unprocessable Entity
+      401:
+        description: Unauthorized
+      409:
+        description: Conflict
+
+/api/v1/accounts/{id}:
+  get:
+    tags:
+      - Accounts
+    security:
+      - bearerAuth: []
+    summary: Get account by Id
+    parameters:
+      - name: id
+        in: path
+        required: true
+    responses:
+      200:
+        description: OK
+      404:
+        description: Not Found
+      401:
+        description: Unauthorized
+      403:
+        description: Forbidden
+
+/api/v1/accounts/update/{id}:
+  put:
+    tags:
+      - Accounts
+    security:
+      - bearerAuth: []
+    summary: Update account
+    parameters:
+      - name: id
+        in: path
+        required: true
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              account_name:
+                type: string
+                example: 'Conta da Caixa Atualizado'
+                required: true
+              account_number:
+                type: string
+                example: '3333555577779999'
+                required: true
+              account_currency:
+                type: string
+                example: 'BRL'
+                required: true
+              account_type:
+                type: string
+                example: 'Conta Corrente'
+                required: true
+              bank_name:
+                type: string
+                example: 'Caixa Econômica'
+                required: true
+              bank_balance:
+                type: integer
+                example: 3000
+                required: true
+    responses:
+      200:
+        description: OK
+      401:
+        description: Unauthorized
+      403:
+        description: Forbidden
+      404:
+        description: Not Found
+      422:
+        description: Unprocessable Entity
+
+/api/v1/accounts/{accountsId}:
+  delete:
+    tags:
+      - Accounts
+    security:
+      - bearerAuth: []
+    summary: Delete account
+    parameters:
+      - name: accountsId
+        in: path
+        required: true
+    responses:
+      200:
+        description: OK
+      404:
+        description: Not Found
+      401:
+        description: Unauthorized
+      403:
+        description: Forbidden

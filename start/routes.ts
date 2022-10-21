@@ -1,25 +1,44 @@
-/*
-|--------------------------------------------------------------------------
-| Routes
-|--------------------------------------------------------------------------
-|
-| This file is dedicated for defining HTTP routes. A single file is enough
-| for majority of projects, however you can define routes in different
-| files and just make sure to import them inside this file. For example
-|
-| Define routes in following two files
-| ├── start/routes/cart.ts
-| ├── start/routes/customer.ts
-|
-| and then import them inside `start/routes.ts` as follows
-|
-| import './routes/cart'
-| import './routes/customer'
-|
-*/
-
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
+// Auth
+Route.post('api/v1/auth/login', 'AuthController.login').middleware('throttle:global')
+Route.post('api/v1/auth/logout', 'AuthController.logout')
+  .middleware('auth')
+  .middleware('throttle:global')
+Route.get('/api/v1/profile', 'AuthController.profile')
+  .middleware('auth')
+  .middleware('throttle:global')
+
+// Users
+Route.post('/api/v1/users/create', 'UsersController.create').middleware('throttle:global')
+Route.get('/api/v1/users/:id', 'UsersController.findById')
+  .middleware('auth')
+  .middleware('throttle:global')
+Route.put('/api/v1/users/update/:id', 'UsersController.update')
+  .middleware('auth')
+  .middleware('throttle:global')
+
+// Accounts
+Route.post('/api/v1/accounts/create', 'AccountsController.create')
+  .middleware('auth')
+  .middleware('throttle:global')
+Route.get('/api/v1/accounts/:id', 'AccountsController.findById')
+  .middleware('auth')
+  .middleware('throttle:global')
+Route.put('/api/v1/accounts/update/:id', 'AccountsController.update')
+  .middleware('auth')
+  .middleware('throttle:global')
+Route.delete('/api/v1/accounts/:id', 'AccountsController.remove')
+  .middleware('auth')
+  .middleware('throttle:global')
+
+// Transactions
+Route.post('/api/v1/transactions/create', 'TransactionsController.create')
+  .middleware('auth')
+  .middleware('throttle:global')
+Route.get('/api/v1/transactions/:id', 'TransactionsController.findById')
+  .middleware('auth')
+  .middleware('throttle:global')
+Route.delete('/api/v1/transactions/:id', 'TransactionsController.remove')
+  .middleware('auth')
+  .middleware('throttle:global')
