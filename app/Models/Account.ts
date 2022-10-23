@@ -1,6 +1,6 @@
 import {
   BaseModel,
-  beforeSave,
+  beforeCreate,
   BelongsTo,
   belongsTo,
   column,
@@ -52,7 +52,7 @@ export default class Account extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updated_at: DateTime
 
-  @beforeSave()
+  @beforeCreate()
   public static async generateUUID(account: Account) {
     account.id = uuidv4()
   }

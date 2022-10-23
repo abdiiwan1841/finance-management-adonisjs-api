@@ -78,13 +78,13 @@
           schema:
             type: object
             properties:
-              username:
+              name:
                 type: string
-                example: 'teste'
+                example: 'teste 1'
                 required: true
               email:
                 type: string
-                example: 'teste@gmail.com'
+                example: 'teste1@gmail.com'
                 required: true
               password:
                 type: string
@@ -99,5 +99,3 @@
         description: Forbidden
       404:
         description: Not Found
-      422:
-        description: Unprocessable Entity
